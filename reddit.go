@@ -19,11 +19,11 @@ func FetchSubReddit(subReddit string) (SubReddit, int) {
 	return data, resp.StatusCode
 }
 
-func FetchPost() []Post {
+func FetchPost(permalink string) []Post {
 	var data []Post
 
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "https://www.reddit.com/r/vim/comments/46oys7/lets_play_a_game_decode_a_sequence_of_vim.json", nil)
+	req, err := http.NewRequest("GET", "https://www.reddit.com"+permalink+".json", nil)
 	req.Header.Set("User-Agent", "Redmit")
 	resp, err := client.Do(req)
 	defer resp.Body.Close()
